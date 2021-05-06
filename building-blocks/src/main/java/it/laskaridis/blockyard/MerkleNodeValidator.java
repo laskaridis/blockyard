@@ -4,6 +4,18 @@ import it.laskaridis.blockyard.digests.Digest;
 import it.laskaridis.blockyard.digests.Digestable;
 import it.laskaridis.blockyard.digests.Digests;
 
+/**
+ * Does a pre-order traversal of the whole tree starting from the merkle
+ * root and validates it. If a merkle node is found to be invalid an
+ * {@link InvalidMerkleTreeException} will be thrown and the traversal
+ * will stop.
+ *
+ * A node is considered to be invalid when:
+ * 1. If the node is a leaf node: it's digest does not match the digest of
+ *    the data associated with that node.
+ * 2. If the node is a parent node: it's digest does not match the digest
+ *    of the child nodes (i.e. H(L|R) when even or H(L|L) when odd).
+ */
 public class MerkleNodeValidator<T extends Digestable> implements MerkleNodeVisitor<T> {
 
     @Override

@@ -34,6 +34,7 @@ public final class MerkleNode<T extends Digestable> {
     public MerkleNode(T value) {
         Assert.notNull(value, "value can't be null for leaf nodes");
         this.value = value;
+t s
         this.left = null;
         this.right = null;
         this.digest = value.getDigest();
